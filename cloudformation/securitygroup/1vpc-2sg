@@ -1,0 +1,46 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+# Create 1 vpc and 1 security group
+
+
+Resources:
+
+  # Create VPCs: VPC01, VPC02 and VPC03
+  VPC01:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: VPC01
+        #Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]
+
+  SecurityGroupTcp22ToAll:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPC01
+      GroupName: SecurityGroupTcp22ToAll
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: SecurityGroupTcp22OpenToAll
+
+  SecurityGroupTraffic2All:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPC01
+      GroupName: SecurityGroupTraffic2All
+      GroupDescription: Enable Traffic to all
+      SecurityGroupIngress:
+      - IpProtocol: -1
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: SecurityGroupTraffic2All
