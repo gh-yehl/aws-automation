@@ -1,0 +1,38 @@
+
+AWSTemplateFormatVersion: 2010-09-09
+
+# Create 3 PVCs along with their respecive subnets and route tables
+# Details:
+# First VPC has two subnets: one public and one private
+# Second and Third VPC each has one private subnet
+# All subnets have their own route table, NOT using the default VPC route table
+
+
+Resources:
+
+  # Create VPCs: VPC01, VPC02 and VPC03
+  VPC01:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value: VPC01
+        #Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]
+
+  SecurityGroupTcp22ToAll:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VPC01
+      GroupName: SecurityGroupTcp22ToAll
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 22
+        ToPort: 22
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: Herman
