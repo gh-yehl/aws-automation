@@ -1,0 +1,35 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+# Create 3 PVCs
+
+Resources:
+
+  # Create VPCs: VPC01, VPC02 and VPC03
+  VPC01:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value:  VPC01
+        #Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]
+  VPC02:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.2.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value:  VPC02
+  VPC03:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.3.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value:  VPC03
