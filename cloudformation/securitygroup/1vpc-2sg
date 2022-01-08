@@ -5,7 +5,7 @@ AWSTemplateFormatVersion: 2010-09-09
 
 Resources:
 
-  # Create VPCs: VPC01, VPC02 and VPC03
+  # Create VPC01
   VPC01:
     Type: AWS::EC2::VPC
     Properties:
@@ -17,6 +17,7 @@ Resources:
         Value: VPC01
         #Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]
 
+  # Create 2 Security Groups
   SecurityGroupTcp22ToAll:
     Type: AWS::EC2::SecurityGroup
     Properties:
