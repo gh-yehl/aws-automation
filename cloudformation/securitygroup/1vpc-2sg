@@ -1,6 +1,6 @@
 AWSTemplateFormatVersion: 2010-09-09
 
-# Create 1 vpc and 1 security group
+# Create 1 vpc and 2 security groups
 
 
 Resources:
@@ -17,7 +17,7 @@ Resources:
         Value: VPC01
         #Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]
 
-  # Create 2 Security Groups
+  # Create two security groups
   SecurityGroupTcp22ToAll:
     Type: AWS::EC2::SecurityGroup
     Properties:
@@ -32,6 +32,8 @@ Resources:
       Tags:
       - Key: Name
         Value: SecurityGroupTcp22OpenToAll
+      - Key: Owner
+        Value: Herman
 
   SecurityGroupTraffic2All:
     Type: AWS::EC2::SecurityGroup
@@ -45,3 +47,5 @@ Resources:
       Tags:
       - Key: Name
         Value: SecurityGroupTraffic2All
+      - Key: Owner
+        Value: Herman
