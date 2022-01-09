@@ -13,7 +13,7 @@ Resources:
       EnableDnsHostnames: true
       Tags:
       - Key: Name
-        Value:  VPC01
+        Value: VPC01
         #Value:  !Join ['', [!Ref "AWS::StackName", "-VPC" ]]
   VPC02:
     Type: AWS::EC2::VPC
@@ -23,7 +23,7 @@ Resources:
       EnableDnsHostnames: true
       Tags:
       - Key: Name
-        Value:  VPC02
+        Value: VPC02
   VPC03:
     Type: AWS::EC2::VPC
     Properties:
@@ -32,4 +32,4 @@ Resources:
       EnableDnsHostnames: true
       Tags:
       - Key: Name
-        Value:  VPC03
+        Value: VPC03
