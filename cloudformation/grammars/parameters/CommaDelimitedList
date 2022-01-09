@@ -1,0 +1,39 @@
+AWSTemplateFormatVersion: 2010-09-09
+#Usage for parameter string type
+
+Parameters:
+  VPC001Name:
+    Type: String
+    Default: VPC001Name-01
+    AllowedValues:
+      - VPC001Name-01
+      - VPC001Name-02
+      - VPC001Name-03
+    Description: Enter VPC001Name-01, VPC001Name-02, VPC001Name-03.
+  VPC002Name:
+    Type: CommaDelimitedList
+    Default: "VPC002Name-01, VPC002Name-02, VPC002Name-03, VPC002Name-04, VPC002Name-05"
+    Description: Do Not change the list
+
+Resources:
+
+  # Create VPC - populate VPC name using parameter
+  VPC001:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value:  !Ref VPC001Name
+
+  VPC002:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.1.0.0/16
+      EnableDnsSupport: true
+      EnableDnsHostnames: true
+      Tags:
+      - Key: Name
+        Value:  !Select [3, !Ref VPC002Name]
